@@ -97,11 +97,11 @@ void main()
 	cout << "Минимальное значение элементов массива = " << Min_Value(arr, n) << endl;
 	cout << "Максимальное значение элементов массива = " << Max_Value(arr, n) << endl;
 
-	cout << "Сдвиг массива влево на "; cin >> shift;
+	cout << "Сдвиг массива влево на ";
 	Shift_Left(arr, n, shift);
 	Print(arr, n);
 
-	cout << "Сдвиг массива вправо на "; cin >> shift;
+	cout << "Сдвиг массива вправо на ";
 	Shift_Right(arr, n, shift);
 	Print(arr, n);
 #endif // ARR
