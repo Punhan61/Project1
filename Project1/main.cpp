@@ -1,39 +1,50 @@
-#include<iostream>
+ï»¿#include<iostream>
 #include"Area.h"
 using namespace std;
 
 //#define AREA
+//#define SHIFT
+
+void Fill_Rand(int arr[], int n);
+void Print(int arr[], int n);
+int* Push_Back(int* arr, int& n, int value);
+int* Push_Front(int* arr, int& n, int value);
+
+int* Pop_Back(int* arr, int& n);
+
+
 
 void main()
 {
 	setlocale(LC_ALL, "");
 
 #ifdef AREA
-	cout << "Âû÷åñëÿåì ïëîùàäü êðóãà è ïîâåõíîñòü öèëèíäðà: " << endl;
-	cout << "Ââåäèòå 'z' äëÿ êðóãà è 'ñ' äëÿ öèëèíäîà: ";
+	cout << "Ð’Ñ‹Ñ‡ÐµÑÐ»ÑÐµÐ¼ Ð¿Ð»Ð¾Ñ‰Ð°Ð´ÑŒ ÐºÑ€ÑƒÐ³Ð° Ð¸ Ð¿Ð¾Ð²ÐµÑ…Ð½Ð¾ÑÑ‚ÑŒ Ñ†Ð¸Ð»Ð¸Ð½Ð´Ñ€Ð°: " << endl;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ 'z' Ð´Ð»Ñ ÐºÑ€ÑƒÐ³Ð° Ð¸ 'Ñ' Ð´Ð»Ñ Ñ†Ð¸Ð»Ð¸Ð½Ð´Ð¾Ð°: ";
 
 	char simbol = 'z'; cin >> simbol;
 
-	cout << "ââåäèòå ðàäèóñ: ";
+	cout << "Ð²Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ€Ð°Ð´Ð¸ÑƒÑ: ";
 	double radius = 0; cin >> radius;
 
 	if (simbol == 'z')
 	{
-		cout << "Ââåäèòå âûñîòó: ";
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð²Ñ‹ÑÐ¾Ñ‚Ñƒ: ";
 		double height = 0; cin >> height;
 
-		cout << "Ïîâåðõíîñòü öèëèíäðà: " << Area(radius, height) << endl;
+		cout << "ÐŸÐ¾Ð²ÐµÑ€Ñ…Ð½Ð¾ÑÑ‚ÑŒ Ñ†Ð¸Ð»Ð¸Ð½Ð´Ñ€Ð°: " << Area(radius, height) << endl;
 	}
 	else
 	{
-		cout << "Ïëîùàäü êðóãà: " << Area(radius) << endl;
+		cout << "ÐŸÐ»Ð¾Ñ‰Ð°Ð´ÑŒ ÐºÑ€ÑƒÐ³Ð°: " << Area(radius) << endl;
 	}
 #endif // AREA
 
-    int n = 5;
+#ifdef SHIFT
+	int n = 5;
 	int shift = 2;
-	int arr[] = {1,2,3,4,5};
-	
+	int arr[] = { 1,2,3,4,5 };
+
 	for (int i = 0; i < shift; i++)
 	{
 		double buffer = arr[0];
@@ -47,6 +58,90 @@ void main()
 	{
 		cout << arr[i] << "  ";
 	}
+#endif // SHIFT
+
+	int n = 5;
+	int* arr = new int[n];
+
+	Fill_Rand(arr, n);
+	Print(arr, n);
+	cout << endl;
+
+	int value;
+	cout << "Ð”Ð¾Ð±Ð°Ð²Ñ‚Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Ð² ÐºÐ¾Ð½ÐµÑ† Ð¼Ð°ÑÑÐ¸Ð²Ð°: "; cin >> value;
+
+	arr = Push_Back(arr, n, value);
+	Print(arr, n);
+	cout << endl;
+
+	cout << "Ð”Ð¾Ð±Ð°Ð²Ñ‚Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Ð² Ð½Ð°Ñ‡Ð°Ð»Ð¾ Ð¼Ð°ÑÑÐ¸Ð²Ð°: "; cin >> value;
+	arr = Push_Front(arr, n, value);
+	Print(arr, n);
+    
+	cout << "Ð£Ð´Ð°Ð»Ð¸Ñ‚Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Ð² ÐºÐ¾Ð½Ñ†Ðµ Ð¼Ð°ÑÑÐ¸Ð²Ð°: ";
+	arr = Pop_Back(arr, n);
+	Print(arr, n);
+
+	delete[]arr;
 }
 
+void Fill_Rand(int arr[], int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		*(arr + i) = rand() % 100;
+	}
+}
 
+void Print(int arr[], int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		cout << arr[i] << "\t";
+	}
+	cout << endl;
+}
+
+int* Push_Back(int* arr, int& n, int value)
+{
+	int* buffer = new int[n + 1];
+
+	for (int i = 0; i < n; i++)
+	{
+		buffer[i] = arr[i];
+	}
+	delete[]arr;
+	arr = buffer;
+	arr[n] = value;
+	n++;
+	return arr;
+}
+
+int* Push_Front(int* arr, int& n, int value)
+{
+	int* buffer = new int[n + 1];
+
+	for (int i = 1; i <= n; i++)
+	{
+		buffer[i] = arr[i - 1];
+	}
+	delete[] arr;
+	arr = buffer;
+	arr[0] = value;
+	n++;
+	return arr;
+}
+
+int* Pop_Back(int* arr, int& n)
+{
+	int* buffer = new int[n - 1];
+
+	for (int i = 0; i < n-1; i++)
+	{
+		buffer[i] = arr[i];
+	}
+	delete[] arr;
+	arr = buffer;
+	n--;
+	return arr;
+}
