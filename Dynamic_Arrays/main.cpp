@@ -1,7 +1,9 @@
 #include"stdafx.h"
 #include"Functions.h"
 
+#define DELIMITER "\n----------------------------------------\n"
 //#define DYNAMIC_MAMORY_1
+//#define DYNAMIC_MAMORY_ROW
 
 void main()
 {
@@ -51,17 +53,17 @@ void main()
 	delete[]arr;
 #endif // DYNAMIC_MAMORY_1
 
-	int rows;
-	int cols;
-    
+	int rows, cols, index;
+	
+#ifdef DYNAMIC_MAMORY_ROW
 	cout << "Введите количество строк: "; cin >> rows;
 	cout << "Введите количество элементов строки: "; cin >> cols;
 
 	int** arr = Allocate(rows, cols);
-
+	
 	Fill_Rand(arr, rows, cols);
 	Print(arr, rows, cols);
-	
+
 	cout << "Добавлением в конец строку: " << endl;
 
 	arr = Push_row_Back(arr, rows, cols);
@@ -81,11 +83,47 @@ void main()
 
 	int index;
 	cout << "Добавляем строку по индексу: "; cin >> index;
-	arr = Insert_Row(arr, rows, cols,index);
+	arr = Insert_Row(arr, rows, cols, index);
 	Print(arr, rows, cols);
 
 	cout << "Удаляем строку по индексу: "; cin >> index;
 	arr = Erase_Row(arr, rows, cols, index);
+	Print(arr, rows, cols);
+#endif // DYNAMIC_MAMRY_ROW
+
+	cout << "Введите количество строк: "; cin >> rows;
+	cout << "Введите количество элементов строки: "; cin >> cols;
+
+	int** arr = Allocate(rows, cols);
+
+	Fill_Rand(arr, rows, cols);
+	Print(arr, rows, cols);
+
+	cout << DELIMITER << endl;
+
+    Push_Col_Back(arr, rows, cols);
+	Print(arr, rows, cols);
+
+	cout << DELIMITER << endl;
+
+    Push_Col_Front(arr, rows, cols);
+	Print(arr, rows, cols);
+
+	cout << DELIMITER << endl;
+
+	Pop_Col_Back(arr, rows, cols);
+	Print(arr, rows, cols);
+
+	cout << DELIMITER << endl;
+
+	Pop_Col_Front(arr, rows, cols);
+	Print(arr, rows, cols);
+
+	cout << DELIMITER << endl;
+
+	cout << "Добавте столбик по индексу"; cin >> index;
+
+	Insert_Col(arr, rows, cols,index);
 	Print(arr, rows, cols);
 
 	Clear(arr,rows);

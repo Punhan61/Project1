@@ -1,5 +1,6 @@
 ﻿#include<iostream>
 #include"Area.h"
+#include<deque>
 using namespace std;
 
 //#define AREA
@@ -60,7 +61,7 @@ void main()
 	}
 #endif // SHIFT
 
-	int n = 5;
+	/*int n = 5;
 	int* arr = new int[n];
 
 	Fill_Rand(arr, n);
@@ -82,7 +83,17 @@ void main()
 	arr = Pop_Back(arr, n);
 	Print(arr, n);
 
-	delete[]arr;
+	delete[]arr;*/
+
+	deque <int> c1;
+
+	c1.push_front(1);
+	if (c1.size() != 0)
+		cout << "First element: " << c1.front() << endl;
+
+	c1.push_front(2);
+	if (c1.size() != 0)
+		cout << "New first element: " << c1.front() << endl;
 }
 
 void Fill_Rand(int arr[], int n)
