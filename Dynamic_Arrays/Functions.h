@@ -33,4 +33,4 @@ void Push_Col_Front(int** arr, const int rows, int& cols);
 void Pop_Col_Back(int** arr, const int rows, int& cols);
 void Pop_Col_Front(int** arr, const int rows, int& cols);
 
-int** Insert_Col(int** arr, const int rows, int& cols, int index);
+void Insert_Col(int** arr, const int rows, int& cols, int index);

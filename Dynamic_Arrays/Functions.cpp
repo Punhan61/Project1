@@ -293,24 +293,19 @@ void Pop_Col_Front(int** arr, const int rows, int& cols)
 	cols--;
 }
 
-int** Insert_Col(int** arr, const int rows, int& cols, int index)
+void Insert_Col(int** arr, const int rows, int& cols, int index)
 {
-	int** buffer = new int* [cols + 1];
-
+	int** buffer = new int*[rows];
+	
 	for (int i = 0; i < rows; i++)
 	{
-
-		for (int j = 0; j < index; j++)
+		for (int j = 0; j < cols; j++)
 		{
-			buffer[j] = arr[j];
-		}
-		for (int k = index; k < cols; k++)
-		{
-			buffer[k + 1] = arr[k];
+			if (j == index)buffer[index] = new int[cols] {};
+			buffer[i][j+1] = arr[i][j];
 		}
 	}
-	delete[]arr;
-	buffer[index] = new int[cols] {};
+		delete[]arr;
+		arr = buffer;
 	cols++;
-	return arr;
 }

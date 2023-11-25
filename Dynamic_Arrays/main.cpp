@@ -125,7 +125,7 @@ void main()
 
 	Insert_Col(arr, rows, cols,index);
 	Print(arr, rows, cols);
-
+	
 	Clear(arr,rows);
 
 }
